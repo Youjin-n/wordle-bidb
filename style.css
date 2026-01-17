@@ -1,0 +1,166 @@
+/* Basit CSS - Başlangıç Seviyesi */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  padding: 12px;
+  background-image: url("background.jpg");
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Başlık Stileri */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  padding: 20px;
+  background-color: rgba(107, 78, 61, 0.7);
+  color: #f5e6d3;
+  border-radius: 15px;
+  z-index: 1000;
+}
+
+header h1 {
+  font-size: 1.8rem;
+}
+
+/* Ana İçelik */
+main {
+  max-width: 600px;
+  padding: 5px;
+  margin-top: 120px; /* sabit header altında içerik kalmasın */
+  margin-bottom: 90px; /* sabit footer'a çarpmasın */
+  background-color: rgba(107, 78, 61, 0.9);
+  border-radius: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Oyun Kutusu */
+.game-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 8px;
+}
+
+.game-container .row {
+  column-gap: 12px;
+  row-gap: 12px;
+}
+
+.game-container .row .col {
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+  height: 40px;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.keyboard-wrap {
+  display: flex;
+  flex-direction: column;
+  border: #999 2px solid;
+  border-radius: 8px;
+  padding: 12px;
+  margin-top: 40px;
+  gap: 8px;
+  width: 100%;
+  align-items: center;
+}
+
+.game-grid {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.letter-box {
+  width: 40px;
+  height: 25px;
+  background-color: #f5e6d3;
+  border: 2px solid #999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: bold;
+  border-radius: 8px;
+}
+
+.letter-box:hover {
+  background-color: #c9a66b;
+  cursor: pointer;
+}
+
+/* Footer */
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  background-color: rgba(107, 78, 61, 0.7);
+  color: #f5e6d3;
+}
+
+/* Mobil Cihazlar İçin */
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+
+  header {
+    padding: 12px;
+    border-radius: 10px;
+  }
+
+  header h1 {
+    font-size: 1.3rem;
+  }
+
+  main {
+    padding: 8px;
+    max-width: 100%;
+    margin-top: 90px;
+    margin-bottom: 80px;
+  }
+
+  .game-container {
+    padding: 10px;
+  }
+
+  .keyboard-wrap {
+    gap: 6px;
+  }
+
+  .game-grid {
+    gap: 4px;
+  }
+
+  .letter-box {
+    width: 35px;
+    height: 25px;
+    font-size: 0.7rem;
+    border: 1px solid #999;
+  }
+
+  footer {
+    padding: 8px;
+    font-size: 0.8rem;
+  }
+}
