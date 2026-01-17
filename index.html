@@ -21,87 +21,107 @@
 
   <!-- Ana içerik -->
   <main>
-    <div class="game-container">
-      <div class="row text-center g-2">
-        <div class="col">a</div>
-        <div class="col">a</div>
-        <div class="col">a</div>
-        <div class="col">a</div>
-        <div class="col">a</div>
-      </div>
+    <div class="game-shell">
+      <div class="game-container">
+        <!-- Durum mesajı (Bootstrap Alert) -->
+        <div id="status" class="alert alert-info text-center py-2 d-none" role="status" aria-live="polite"></div>
 
-      <div class="row text-center g-2">
-        <div class="col">a</div>
-        <div class="col">a</div>
-        <div class="col">a</div>
-        <div class="col">a</div>
-        <div class="col">a</div>
-      </div>
-
-      <div class="row text-center g-2">
-        <div class="col">a</div>
-        <div class="col">a</div>
-        <div class="col">a</div>
-        <div class="col">a</div>
-        <div class="col">a</div>
-      </div>
-
-      <div class="row text-center g-2">
-        <div class="col">a</div>
-        <div class="col">a</div>
-        <div class="col">a</div>
-        <div class="col">a</div>
-        <div class="col">a</div>
-      </div>
-
-      <div class="row text-center g-2">
-        <div class="col">a</div>
-        <div class="col">a</div>
-        <div class="col">a</div>
-        <div class="col">a</div>
-        <div class="col">a</div>
-      </div>
-
-      <div class="keyboard-wrap">
-        <!-- Oyun kutuları - Türk Q klavye dizilimi -->
-        <div class="game-grid">
-          <div class="letter-box">E</div>
-          <div class="letter-box">R</div>
-          <div class="letter-box">T</div>
-          <div class="letter-box">Y</div>
-          <div class="letter-box">U</div>
-          <div class="letter-box">I</div>
-          <div class="letter-box">O</div>
-          <div class="letter-box">P</div>
-          <div class="letter-box">Ğ</div>
-          <div class="letter-box">Ü</div>
+        <!-- Tahmin Tahtası: 6 satır × 5 sütun -->
+        <div id="board">
+          <div class="row">
+            <div class="col" data-row="0" data-col="0"></div>
+            <div class="col" data-row="0" data-col="1"></div>
+            <div class="col" data-row="0" data-col="2"></div>
+            <div class="col" data-row="0" data-col="3"></div>
+            <div class="col" data-row="0" data-col="4"></div>
+          </div>
+          <div class="row">
+            <div class="col" data-row="1" data-col="0"></div>
+            <div class="col" data-row="1" data-col="1"></div>
+            <div class="col" data-row="1" data-col="2"></div>
+            <div class="col" data-row="1" data-col="3"></div>
+            <div class="col" data-row="1" data-col="4"></div>
+          </div>
+          <div class="row">
+            <div class="col" data-row="2" data-col="0"></div>
+            <div class="col" data-row="2" data-col="1"></div>
+            <div class="col" data-row="2" data-col="2"></div>
+            <div class="col" data-row="2" data-col="3"></div>
+            <div class="col" data-row="2" data-col="4"></div>
+          </div>
+          <div class="row">
+            <div class="col" data-row="3" data-col="0"></div>
+            <div class="col" data-row="3" data-col="1"></div>
+            <div class="col" data-row="3" data-col="2"></div>
+            <div class="col" data-row="3" data-col="3"></div>
+            <div class="col" data-row="3" data-col="4"></div>
+          </div>
+          <div class="row">
+            <div class="col" data-row="4" data-col="0"></div>
+            <div class="col" data-row="4" data-col="1"></div>
+            <div class="col" data-row="4" data-col="2"></div>
+            <div class="col" data-row="4" data-col="3"></div>
+            <div class="col" data-row="4" data-col="4"></div>
+          </div>
+          <div class="row">
+            <div class="col" data-row="5" data-col="0"></div>
+            <div class="col" data-row="5" data-col="1"></div>
+            <div class="col" data-row="5" data-col="2"></div>
+            <div class="col" data-row="5" data-col="3"></div>
+            <div class="col" data-row="5" data-col="4"></div>
+          </div>
         </div>
 
-        <div class="game-grid">
-          <div class="letter-box">A</div>
-          <div class="letter-box">S</div>
-          <div class="letter-box">D</div>
-          <div class="letter-box">F</div>
-          <div class="letter-box">G</div>
-          <div class="letter-box">H</div>
-          <div class="letter-box">J</div>
-          <div class="letter-box">K</div>
-          <div class="letter-box">L</div>
-          <div class="letter-box">Ş</div>
-          <div class="letter-box">İ</div>
+        <!-- Sanal Klavye -->
+        <div id="keyboard" class="keyboard-wrap mt-3">
+          <!-- Üst satır - Türk Q klavye dizilimi -->
+          <div class="keyboard-row">
+            <div class="letter-box" data-key="E">E</div>
+            <div class="letter-box" data-key="R">R</div>
+            <div class="letter-box" data-key="T">T</div>
+            <div class="letter-box" data-key="Y">Y</div>
+            <div class="letter-box" data-key="U">U</div>
+            <div class="letter-box" data-key="I">I</div>
+            <div class="letter-box" data-key="O">O</div>
+            <div class="letter-box" data-key="P">P</div>
+            <div class="letter-box" data-key="Ğ">Ğ</div>
+            <div class="letter-box" data-key="Ü">Ü</div>
+          </div>
+
+          <!-- Orta satır -->
+          <div class="keyboard-row">
+            <div class="letter-box" data-key="A">A</div>
+            <div class="letter-box" data-key="S">S</div>
+            <div class="letter-box" data-key="D">D</div>
+            <div class="letter-box" data-key="F">F</div>
+            <div class="letter-box" data-key="G">G</div>
+            <div class="letter-box" data-key="H">H</div>
+            <div class="letter-box" data-key="J">J</div>
+            <div class="letter-box" data-key="K">K</div>
+            <div class="letter-box" data-key="L">L</div>
+            <div class="letter-box" data-key="Ş">Ş</div>
+            <div class="letter-box" data-key="İ">İ</div>
+          </div>
+
+          <!-- Alt satır -->
+          <div class="keyboard-row">
+            <div class="letter-box wide-key" data-action="enter">Enter</div>
+            <div class="letter-box" data-key="Z">Z</div>
+            <div class="letter-box" data-key="C">C</div>
+            <div class="letter-box" data-key="V">V</div>
+            <div class="letter-box" data-key="B">B</div>
+            <div class="letter-box" data-key="N">N</div>
+            <div class="letter-box" data-key="M">M</div>
+            <div class="letter-box" data-key="Ö">Ö</div>
+            <div class="letter-box" data-key="Ç">Ç</div>
+            <div class="letter-box wide-key" data-action="backspace" aria-label="Sil"><i class="bi bi-backspace"></i>
+            </div>
+          </div>
         </div>
 
-        <div class="game-grid">
-          <div class="letter-box">Enter</div>
-          <div class="letter-box">Z</div>
-          <div class="letter-box">C</div>
-          <div class="letter-box">V</div>
-          <div class="letter-box">B</div>
-          <div class="letter-box">N</div>
-          <div class="letter-box">M</div>
-          <div class="letter-box">Ö</div>
-          <div class="letter-box">Ç</div>
-          <div class="letter-box"><i class="bi bi-backspace"></i></div>
+        <!-- Reset Butonu -->
+        <div class="text-center mt-2 mb-1">
+          <button id="resetBtn" class="btn btn-sm btn-light">Yeniden Başla</button>
         </div>
       </div>
     </div>

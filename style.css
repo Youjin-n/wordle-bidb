@@ -6,15 +6,20 @@
   box-sizing: border-box;
 }
 
+:root {
+  --header-h: 36px;
+  --footer-h: 24px;
+  --shell-offset-y: -5px;
+}
+
 body {
   font-family: Arial, sans-serif;
-  padding: 12px;
+  padding: 0;
   background-image: url("background.jpg");
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  overflow: hidden;
 }
 
 /* Başlık Stileri */
@@ -23,87 +28,158 @@ header {
   top: 0;
   left: 0;
   right: 0;
-  text-align: center;
-  padding: 20px;
-  background-color: rgba(107, 78, 61, 0.7);
+  height: var(--header-h);
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(107, 78, 61, 0.9);
   color: #f5e6d3;
-  border-radius: 15px;
   z-index: 1000;
 }
 
 header h1 {
-  font-size: 1.8rem;
+  font-size: 1.15rem;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  line-height: var(--header-h);
 }
 
-/* Ana İçelik */
+/* Ana İçerik: header/footer arasına sabitlenir */
 main {
-  max-width: 600px;
-  padding: 5px;
-  margin-top: 120px; /* sabit header altında içerik kalmasın */
-  margin-bottom: 90px; /* sabit footer'a çarpmasın */
-  background-color: rgba(107, 78, 61, 0.9);
-  border-radius: 15px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: var(--header-h);
+  bottom: var(--footer-h);
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  overflow: hidden;
+}
+
+/* Oyun kutusu (kart) */
+.game-shell {
+  width: min(380px, 100%);
+  background-color: rgba(107, 78, 61, 0.95);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  position: relative;
+  top: var(--shell-offset-y);
+  transform-origin: top center;
+  will-change: transform;
 }
 
 /* Oyun Kutusu */
 .game-container {
   display: flex;
   flex-direction: column;
-  gap: 10px;
   padding: 8px;
 }
 
-.game-container .row {
-  column-gap: 12px;
-  row-gap: 12px;
+/* Tahmin Tahtası */
+#board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  margin-bottom: 4px;
+}
+
+#board .row {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
 }
 
 .game-container .row .col {
-  background: rgba(255, 255, 255, 0.5);
-  border-radius: 8px;
-  height: 40px;
-  aspect-ratio: 1 / 1;
+  background: rgba(255, 255, 255, 0.85);
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  width: 50px;
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-weight: bold;
+  font-size: 1.55rem;
+  text-transform: uppercase;
+  color: #333;
+}
+
+/* Wordle Durum Renkleri */
+.is-correct {
+  background-color: #538d4e !important;
+  color: white !important;
+  border-color: #538d4e !important;
+}
+
+.is-present {
+  background-color: #b59f3b !important;
+  color: white !important;
+  border-color: #b59f3b !important;
+}
+
+.is-absent {
+  background-color: #3a3a3c !important;
+  color: white !important;
+  border-color: #3a3a3c !important;
 }
 
 .keyboard-wrap {
   display: flex;
   flex-direction: column;
-  border: #999 2px solid;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
   border-radius: 8px;
-  padding: 12px;
-  margin-top: 40px;
-  gap: 8px;
+  padding: 6px;
   width: 100%;
+  max-width: 360px;
   align-items: center;
 }
 
-.game-grid {
+/* Klavye satırları */
+.keyboard-row {
   display: flex;
   justify-content: center;
-  gap: 6px;
-  flex-wrap: wrap;
+  gap: 3px;
+  width: 100%;
+  flex-wrap: nowrap;
 }
 
 .letter-box {
-  width: 40px;
-  height: 25px;
-  background-color: #f5e6d3;
-  border: 2px solid #999;
+  width: 31px;
+  height: 38px;
+  flex: 0 1 auto;
+  min-width: 0;
+  background-color: #d4c4b0;
+  border: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: bold;
-  border-radius: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  color: #333;
+  user-select: none;
+}
+
+/* Geniş tuşlar (Enter, Backspace) */
+.letter-box.wide-key {
+  width: 44px;
+  font-size: 0.6rem;
+  white-space: nowrap;
 }
 
 .letter-box:hover {
-  background-color: #c9a66b;
-  cursor: pointer;
+  background-color: #b8a896;
 }
 
 /* Footer */
@@ -112,55 +188,90 @@ footer {
   bottom: 0;
   left: 0;
   width: 100%;
-  text-align: center;
-  padding: 10px;
-  background-color: rgba(107, 78, 61, 0.7);
+  height: var(--footer-h);
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(107, 78, 61, 0.9);
   color: #f5e6d3;
+  font-size: 0.75rem;
+  line-height: 1;
+}
+
+footer p {
+  margin: 0;
+  padding: 0;
+  line-height: var(--footer-h);
 }
 
 /* Mobil Cihazlar İçin */
 @media (max-width: 600px) {
-  body {
-    padding: 10px;
+  :root {
+    --header-h: 32px;
+    --footer-h: 22px;
+    --shell-offset-y: -3px;
   }
 
   header {
-    padding: 12px;
-    border-radius: 10px;
+    height: var(--header-h);
+    padding: 0 8px;
   }
 
   header h1 {
-    font-size: 1.3rem;
+    font-size: 1.05rem;
+    line-height: var(--header-h);
   }
 
   main {
-    padding: 8px;
-    max-width: 100%;
-    margin-top: 90px;
-    margin-bottom: 80px;
+    padding: 6px;
   }
 
   .game-container {
-    padding: 10px;
+    padding: 5px;
+  }
+
+  #board {
+    margin-top: 4px;
+  }
+
+  #board .row {
+    gap: 3px;
+  }
+
+  .game-container .row .col {
+    width: 44px;
+    height: 44px;
+    font-size: 1.25rem;
   }
 
   .keyboard-wrap {
-    gap: 6px;
+    padding: 4px;
+    gap: 3px;
   }
 
-  .game-grid {
-    gap: 4px;
+  .keyboard-row {
+    gap: 2px;
   }
 
   .letter-box {
-    width: 35px;
-    height: 25px;
-    font-size: 0.7rem;
-    border: 1px solid #999;
+    width: 27px;
+    height: 33px;
+    font-size: 0.65rem;
+  }
+
+  .letter-box.wide-key {
+    width: 37px;
+    font-size: 0.5rem;
   }
 
   footer {
-    padding: 8px;
-    font-size: 0.8rem;
+    height: var(--footer-h);
+    padding: 0 8px;
+    font-size: 0.7rem;
+  }
+
+  footer p {
+    line-height: var(--footer-h);
   }
 }
